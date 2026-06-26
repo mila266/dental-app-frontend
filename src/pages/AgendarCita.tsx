@@ -41,14 +41,12 @@ export default function AgendarCita() {
   const [loadingHorarios, setLoadingHorarios] = useState(false)
   const [loadingServicios, setLoadingServicios] = useState(false)
 
-  // Cargar especialidades al montar
   useEffect(() => {
     getEspecialidades()
       .then(data => setEspecialidades(data))
       .catch(err => console.error(err))
   }, [])
 
-  // Cargar doctores cuando cambia especialidad
   useEffect(() => {
     if (!especialidadSeleccionada) return
     setLoadingDoctores(true)
@@ -85,12 +83,10 @@ export default function AgendarCita() {
       .then(data => setHorarios(data))
       .catch(err => console.error(err))
       .finally(() => setLoadingHorarios(false))
-  }, [doctorSeleccionado]) // ← aquí estaba el bug
+  }, [doctorSeleccionado]) 
 
-  // Días únicos del doctor para esa especialidad
   const diasDisponibles = [...new Set(horarios.map(h => h.dia_semana))].sort()
 
-  // Por ahora muestra el bloque de horario, después generaremos slots reales
   const horariosDelDia = horarios.filter(h => h.dia_semana === diaSeleccionado)
 
   const doctorInfo = doctorespecialidad.find(d => d.doctor.id === doctorSeleccionado)
@@ -157,13 +153,11 @@ export default function AgendarCita() {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-2xl mx-auto">
 
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Agendar Cita</h1>
           <p className="text-gray-500 mt-1">Sigue los pasos para reservar tu cita</p>
         </div>
 
-        {/* Indicador de pasos */}
         <div className="flex items-center mb-8">
           {[1, 2, 3, 4].map((n) => (
             <div key={n} className="flex items-center">
@@ -264,7 +258,6 @@ export default function AgendarCita() {
             </CardHeader>
             <CardContent className="space-y-6">
 
-              {/* Selector de doctor */}
               <div>
                 <p className="text-sm font-medium text-gray-700 mb-2">Doctor disponible</p>
                 {loadingDoctores ? (
@@ -291,7 +284,6 @@ export default function AgendarCita() {
                 )}
               </div>
 
-              {/* Días disponibles del doctor */}
               {loadingHorarios && (
                 <p className="text-sm text-gray-400">Cargando horarios...</p>
               )}
@@ -321,7 +313,6 @@ export default function AgendarCita() {
                 </div>
               )}
 
-              {/* Slots de hora para el día seleccionado */}
               {diaSeleccionado && (
                 <div>
                   <p className="text-sm font-medium text-gray-700 mb-3">

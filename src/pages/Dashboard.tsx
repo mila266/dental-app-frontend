@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-// import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { Cita } from '../types/index'
@@ -38,7 +37,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      {/* Header */}
+
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">
           Bienvenida 👋
@@ -83,7 +82,6 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      {/* Próxima cita */}
       {proxima && (
         <Card className="mb-8 border-blue-200 bg-blue-50">
           <CardHeader>
@@ -106,7 +104,6 @@ export default function Dashboard() {
         </Card>
       )}
 
-      {/* Lista de citas */}
       <Card>
         <CardHeader>
           <CardTitle>Historial de citas</CardTitle>

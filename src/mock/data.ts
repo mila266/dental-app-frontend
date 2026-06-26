@@ -18,7 +18,11 @@ export const citas: Cita[] = [
   {
     id: '1',
     paciente: 'Juan Pérez',
+<<<<<<< HEAD
     doctor: doctores[0],
+=======
+    doctores: doctores[0],
+>>>>>>> 6503037 (Actualiza llamada de datos en Dashboard y AgendarCita/ Añade interfaz de login)
     especialidad: 'Ortodoncia',
     fecha: '2026-07-10',
     hora: '10:00',
@@ -28,7 +32,11 @@ export const citas: Cita[] = [
   {
     id: '2',
     paciente: 'Juan Pérez',
+<<<<<<< HEAD
     doctor: doctores[2],
+=======
+    doctores: doctores[2],
+>>>>>>> 6503037 (Actualiza llamada de datos en Dashboard y AgendarCita/ Añade interfaz de login)
     especialidad: 'Limpieza',
     fecha: '2026-06-15',
     hora: '09:00',
@@ -37,7 +45,11 @@ export const citas: Cita[] = [
   {
     id: '3',
     paciente: 'Juan Pérez',
+<<<<<<< HEAD
     doctor: doctores[1],
+=======
+    doctores: doctores[1],
+>>>>>>> 6503037 (Actualiza llamada de datos en Dashboard y AgendarCita/ Añade interfaz de login)
     especialidad: 'Endodoncia',
     fecha: '2026-06-01',
     hora: '11:30',

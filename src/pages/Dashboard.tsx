@@ -1,7 +1,11 @@
-import { citas, paciente } from '../mock/data'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+// import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock, User } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import type { Cita } from '../types/index'
+import { getCitas } from '../lib/api'
 
 const coloresBadge: Record<string, string> = {
   programada: 'bg-blue-100 text-blue-700',
@@ -11,18 +15,38 @@ const coloresBadge: Record<string, string> = {
 }
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const [citas, setCitas] = useState<Cita[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    getCitas()
+      .then(data => setCitas(data))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false))
+  }, [])
+  
   const proxima = citas.find(c => c.estado === 'programada')
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
+        <p className="text-gray-500"> Cargando ... </p>
+      </div>
+    )
+  }
+
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">
-          Bienvenida, {paciente.nombre} 👋
+          Bienvenida 👋
         </h1>
         <p className="text-gray-500 mt-1">
           Aquí tienes un resumen de tus citas
         </p>
+        <Button onClick={() => navigate('/agendar-cita')} className="mt-4"> Agendar Cita </Button>
       </div>
 
       {/* Tarjetas resumen */}
@@ -96,7 +120,7 @@ export default function Dashboard() {
               >
                 <div>
                   <p className="font-medium text-gray-900">{cita.doctor.nombre}</p>
-                  <p className="text-sm text-gray-500">{cita.especialidad} · {cita.fecha} {cita.hora}</p>
+                  <p className="text-sm text-gray-500">{cita.servicio.especialidad.nombre} · {cita.fecha} </p>
                 </div>
                 <span className={`text-xs px-2 py-1 rounded-full font-medium ${coloresBadge[cita.estado]}`}>
                   {cita.estado}

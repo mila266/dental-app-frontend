@@ -87,8 +87,6 @@ export default function AgendarCita() {
 
   const diasDisponibles = [...new Set(horarios.map(h => h.dia_semana))].sort()
 
-  const horariosDelDia = horarios.filter(h => h.dia_semana === diaSeleccionado)
-
   const doctorInfo = doctorespecialidad.find(d => d.doctor.id === doctorSeleccionado)
   const servicioInfo = servicios.find(s => s.id === servicioSeleccionado)
   const especialidadInfo = especialidades.find(e => e.id === especialidadSeleccionada)
